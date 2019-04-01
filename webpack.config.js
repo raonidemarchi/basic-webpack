@@ -1,9 +1,18 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: 'production',
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'babel-loader',
+          query: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
+        }]
+      },
       {
         test: /\.html$/,
         use: [{
@@ -21,7 +30,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html'
+      template: './public/index.html'
     })
   ]
 };
